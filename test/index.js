@@ -1,2 +1,4 @@
-const a = 1;
-const fn = () => {};
+"use strict";
+
+var a = 1;
+var fn = function fn() {};

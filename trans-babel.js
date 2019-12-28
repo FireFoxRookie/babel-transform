@@ -58,10 +58,8 @@ class TransformFile {
         if (path) {
             // 获取给定路径下的子目录文件路径
             let files = fs.readdirSync(path);
-            console.log('preFiles', files);
             // 设置每个文件或目录的绝对路径
             files = this.fullPath(path, files);
-            console.log('files', files);
             // 循环找出子目录下的所有js文件和目录
             files.forEach(file => {
                 const stats = fs.statSync(file);
@@ -111,13 +109,15 @@ class TransformFile {
     async setBabel (path) {
         // 获取当前目录下的所有子目录和子js文件
         const {dirArr, jsFileArr} = this.getDirAndFileNum(path);
+        console.log('dirArr', dirArr);
+        console.log('jsFileArr', jsFileArr);
         if (jsFileArr.length > 0) {
             let index = 0;
             // 循环设置js文件
             while (index < jsFileArr.length) {
                 try {
                     // 利用babel转换js文件
-                    await this.babelTransform(file);
+                    await this.babelTransform(jsFileArr[index]);
                     index++;
                 } catch (err) {
                     return false;
